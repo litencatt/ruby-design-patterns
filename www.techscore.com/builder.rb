@@ -4,33 +4,59 @@ class SaltWater
     @water = water
     @salt = salt
   end
-end
 
-# 素材の適用
-class SaltWaterBuilder
-  attr_reader :salt_water
-  def initialize
-    @salt_water = SaltWater.new(0, 0)
+  def solute
+    @salt
   end
 
-  def add_solute(salt_amount)
-    @salt_water.salt += salt_amount
+  def add_solute(amount)
+    @salt += amount
+  end
+end
+
+class SugarWater
+  attr_accessor :water, :sugar
+  def initialize(water, sugar)
+    @water = water
+    @sugar = sugar
+  end
+
+  def solute
+    @sugar
+  end
+
+  def add_solute(amount)
+    @sugar += amount
+  end
+end
+
+
+# 溶液ビルダー
+class SolutionBuilder
+  attr_reader :solution
+
+  def initialize(class_name)
+    @solution = class_name.new(0, 0)
   end
 
   def add_solvent(water_amount)
-    @salt_water.water += water_amount
+    solution.water += water_amount
   end
 
-  def abandon_solution(salt_water_amount)
-    salt_delta  = salt_water_amount * (@salt_water.salt  / (@salt_water.salt + @salt_water.water))
-    water_delta = salt_water_amount * (@salt_water.water / (@salt_water.salt + @salt_water.water))
+  def add_solute(solute_amount)
+    solution.add_solute(solute_amount)
+  end
 
-    @salt_water.salt  -= salt_delta
-    @salt_water.water -= water_delta
+  def abandon_solution(solution_amount)
+    solute_delta = solution_amount * (solution.solute / (solution.solute + solution.water))
+    water_delta  = solution_amount * (solution.water / (solution.solute + solution.water))
+
+    solution.add_solute(-solute_delta)
+    solution.water  -= water_delta
   end
 
   def result
-    @salt_water
+    solution
   end
 end
 
@@ -42,15 +68,19 @@ class Director
   end
 
   def cook
-    @builder.add_solvent(100)
-    @builder.add_solute(40)
-    @builder.abandon_solution(70)
-    @builder.add_solute(15)
+    builder.add_solvent(100)
+    builder.add_solute(40)
+    builder.abandon_solution(70)
+    builder.add_solute(15)
   end
 end
 
-builder = SaltWaterBuilder.new
+builder = SolutionBuilder.new(SaltWater)
 director = Director.new(builder)
 director.cook
+p builder.result
 
+builder = SolutionBuilder.new(SugarWater)
+director = Director.new(builder)
+director.cook
 p builder.result
