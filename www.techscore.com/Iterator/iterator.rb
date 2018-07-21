@@ -1,3 +1,4 @@
+# 集約オブジェクトの要素
 class Student
   attr_reader :name, :sex
 
@@ -7,25 +8,45 @@ class Student
   end
 end
 
+# 集約オブジェクト
 class StudentList
   attr_reader :students, :last
 
   def initialize
     @students = []
-    @last = 0
+  end
+
+  def gt_student_at(index)
+    @students[index]
   end
 
   def add(student)
     @students << student
-    @last += 1
   end
 
-  def student_at(index)
-    @students[index]
+  def length
+    @students.length
   end
 
-  def last
-    @last
+  def iterator
+    StudentListIterator.new(self)
+  end
+end
+
+class StudentListIterator
+  def initialize(student_list)
+    @student_list = student_list
+    @index = 0
+  end
+
+  def has_next?
+    @index < @student_list.length
+  end
+
+  def next_student
+    student = self.has_next? ? @student_list.gt_student_at(@index) : nil
+    @index += 1
+    student
   end
 end
 
@@ -40,8 +61,10 @@ class Teacher
   end
 
   def call_students
-    for i in 0...@student_list.last
-      puts @student_list.student_at(i).name
+    iterator = @student_list.iterator
+    while iterator.has_next?
+      student = iterator.next_student
+      puts student.name
     end
   end
 end
