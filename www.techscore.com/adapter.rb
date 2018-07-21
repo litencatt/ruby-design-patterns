@@ -8,9 +8,15 @@ class Chairperson
   end
 end
 
+class NewTaro < Taro
+  def organize_class
+    enjoy_with_all_classmate
+  end
+end
+
 class Teacher
   def main
-    chairperson = Taro.new
+    chairperson = NewTaro.new
     chairperson.organize_class
   end
 end
