@@ -1,5 +1,3 @@
-require 'pry-byebug'
-
 class Saxophone
   def initialize(name)
     @name = name
@@ -53,6 +51,6 @@ factory = SaxophoneFactory.new(3)
 saxophones = factory.ship_out
 saxophones.each { |saxophone| saxophone.play }
 
-#factory = TrumpetFactory.new(2)
-#trumpets = factory.ship_out
-#trumpets.each { |trumpet| trumpet.play }
+factory = TrumpetFactory.new(2)
+trumpets = factory.ship_out
+trumpets.each { |trumpet| trumpet.play }

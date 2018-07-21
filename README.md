@@ -20,3 +20,6 @@ http://www.techscore.com/tech/DesignPattern/index.html/
     - 複数の作成過程の集合
   - 使用素材(Builder)
     - 各建築物ごとで使う素材の決定
+
+## FactoryMethod
+- インスタンスの生成をサブクラスに行わせることで、より柔軟に生成するインスタンスを選択することが可能となる
