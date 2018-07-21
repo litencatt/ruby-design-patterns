@@ -37,3 +37,6 @@ http://www.techscore.com/tech/DesignPattern/index.html/
 ## Decorator
 - 既存のオブジェクトに対して簡単に機能の追加をするためのパターン
 - レイヤ状に機能を積み重ねて、必要な機能をもつオブジェクトを作ることができる
+
+## Proxy
+- 1つのオブジェクトに複数の関心ことがある場合にそれを分離する
