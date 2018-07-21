@@ -23,19 +23,14 @@ class BankAccountProxy
     @owner_name = owner_name
   end
 
+  def method_missing(name, *args)
+    check_access
+    @real_object.send(name, *args)
+  end
+
   def balance
     check_access
     @real_object.balance
-  end
-
-  def deposit(amount)
-    check_access
-    @real_object.deposit(amount)
-  end
-
-  def withdraw(amount)
-    check_access
-    @real_object.withdraw(amount)
   end
 
   def check_access
@@ -46,7 +41,7 @@ class BankAccountProxy
 end
 
 account = BankAccount.new(100)
-proxy = BankAccountProxy.new(account, ENV["LOGNAME"])
+proxy = BankAccountProxy.new(account, ENV["USER"])
 puts proxy.deposit(50)
 puts proxy.withdraw(10)
 
