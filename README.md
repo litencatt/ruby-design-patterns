@@ -26,4 +26,4 @@ http://www.techscore.com/tech/DesignPattern/index.html/
 
 ## Adapter
 - インタフェースに互換性の無いクラス同士を組み合わせる
-  - 継承を利用してインタフェースの差異を吸収する
+  - 継承または委譲を利用してインタフェースの差異を吸収する
