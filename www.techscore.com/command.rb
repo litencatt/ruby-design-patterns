@@ -2,26 +2,8 @@ class Beaker
   def initialize(water, salt)
     @water = water
     @salt = salt
-    @isMelted = true
+    @melted = true
     mix
-  end
-
-  def experiment(param)
-    if param == :add_salt
-      while melted?
-        add_salt(1)
-        mix
-      end
-      puts "食塩を1gずつ加える実験"
-      note
-    elsif param == :add_water
-      while !melted?
-        add_water(10)
-        mix
-      end
-      puts "水を10gずつ加える実験"
-      note
-    end
   end
 
   def add_salt(amount)
@@ -34,14 +16,14 @@ class Beaker
 
   def mix
     if concentration < 26.4
-      @isMelted = true
+      @melted = true
     else
-      @isMelted = false
+      @melted = false
     end
   end
 
   def melted?
-    @isMelted ? true : false
+    @melted
   end
 
   def note
@@ -55,8 +37,60 @@ class Beaker
   end
 end
 
-beaker = Beaker.new(100, 0)
-beaker.experiment(:add_salt)
+class Command
+  def set_beaker(beaker)
+    @beaker = beaker
+  end
 
-beaker2 = Beaker.new(0, 10)
-beaker2.experiment(:add_water)
+  def execute
+  end
+end
+
+class AddSaltCommand < Command
+  def execute
+    while @beaker.melted?
+      @beaker.add_salt(1)
+      @beaker.mix
+    end
+    puts "食塩を1gずつ加える実験"
+    @beaker.note
+  end
+end
+
+class AddWaterCommand < Command
+  def execute
+    while !@beaker.melted?
+      @beaker.add_water(10)
+      @beaker.mix
+    end
+    puts "水を10gずつ加える実験"
+    @beaker.note
+  end
+end
+
+class MakeSaltWaterCommand < Command
+  def execute
+    @beaker.mix
+    puts "食塩水を作る実験"
+    @beaker.note
+  end
+end
+
+class Student
+  def exec
+    add_salt = AddSaltCommand.new
+    add_water = AddWaterCommand.new
+    make_salt_water = MakeSaltWaterCommand.new
+
+    add_salt.set_beaker(Beaker.new(100, 0))
+    add_water.set_beaker(Beaker.new(0, 10))
+    make_salt_water.set_beaker(Beaker.new(90, 10))
+
+    add_salt.execute
+    add_water.execute
+    make_salt_water.execute
+  end
+end
+
+student = Student.new
+student.exec
