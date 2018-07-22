@@ -30,6 +30,9 @@ http://www.techscore.com/tech/DesignPattern/index.html/
   - 継承または委譲を利用してインタフェースの差異を吸収する
   - オブジェクトが複雑/完全な理解がない場合にこのパターンを適用する
 
+### Bridge
+- interfaceの説明
+
 ### Composite
 - 「容器と中身を同一視する」ことで、再帰的な構造の取り扱いを容易にする
   - 例) ファイルシステム
