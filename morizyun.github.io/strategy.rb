@@ -1,9 +1,11 @@
+# Strategy
 class Formatter
   def output_report(title, text)
     raise 'Called abstract method !!'
   end
 end
 
+# ConcreteStrategy1
 class HTMLFormatter < Formatter
   def output_report(report)
     puts "<html><head><title>#{report.title}</title></head><body>"
@@ -12,6 +14,7 @@ class HTMLFormatter < Formatter
   end
 end
 
+# ConcreteStrategy2
 class PlaneTextFormatter < Formatter
   def output_report(report)
     puts "***** #{report.title} *****"
@@ -19,6 +22,7 @@ class PlaneTextFormatter < Formatter
   end
 end
 
+# Context
 class Report
   attr_reader :title, :text
   attr_accessor :formatter

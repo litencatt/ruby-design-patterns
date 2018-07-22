@@ -1,3 +1,4 @@
+# strategy.rbをProcオブジェクトを使用して書き換える
 class Report
   attr_reader :title, :text
   attr_accessor :formatter
@@ -14,13 +15,13 @@ class Report
 end
 
 HTML_FORMATTER = lambda do |context|
-  puts ""
-  context.text.each { |line| puts "" }
-  puts ""
+  puts "<html><head><title>#{context.title}</title></head><body>"
+  context.text.each { |line| puts "<p>#{line}</p>" }
+  puts "</body></html>"
 end
 
 PLANE_TEXT_FORMATTER = lambda do |context|
-  puts ""
+  puts "***** #{context.title} *****"
   context.text.each { |line| puts(line) }
 end
 

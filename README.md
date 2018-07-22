@@ -56,5 +56,8 @@ http://www.techscore.com/tech/DesignPattern/index.html/
 ### Observer
 - あるインスタンスの状態が変化した際に、そのインスタンス自身が、「観察者」に状態の変化を「通知」する仕組み
 
+### Strategy
+- 戦略の部分を意識して別クラスとして作成しておくことで追加・変更が容易にできる
+
 ## グルーピング参考
 [再考: GoF デザインパターン](https://qiita.com/irxground/items/d1f9cc447bafa8db2388)
