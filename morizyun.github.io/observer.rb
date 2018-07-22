@@ -2,12 +2,14 @@ require 'observer'
 
 class Employee
   include Observable
+
   attr_reader :name, :title, :salary
 
   def initialize(name, title, salary)
     @name = name
     @title = title
     @salary = salary
+    # ここでobserverを追加
     add_observer(Payroll.new)
     add_observer(TaxMan.new)
   end
