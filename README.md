@@ -53,5 +53,8 @@ http://www.techscore.com/tech/DesignPattern/index.html/
 - 走査方法を提供するクラスの独立
   - 例) BlogIteratorクラスの作成
 
-### グルーピング参考
+### Observer
+- あるインスタンスの状態が変化した際に、そのインスタンス自身が、「観察者」に状態の変化を「通知」する仕組み
+
+## グルーピング参考
 [再考: GoF デザインパターン](https://qiita.com/irxground/items/d1f9cc447bafa8db2388)
